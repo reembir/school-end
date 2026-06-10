@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>נגן השירים של ההצגה שלנו</title>
+    <style>
+        /* עיצוב כללי של הדף */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e1e2f, #111119);
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #ff007f;
+            text-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
+            margin-bottom: 5px;
+            font-size: 2.5rem;
+        }
+
+        p.subtitle {
+            color: #a0a0be;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        /* מכלול רשימת השירים */
+        .playlist-container {
+            width: 100%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* עיצוב של כל שורה/רצועה */
+        .audio-track {
+            background: rgba(255, 255, 255, 0.03);
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            border-right: 5px solid #ff007f;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .audio-track:hover {
+            background: rgba(255, 255, 255, 0.07);
+            transform: translateY(-2px);
+        }
+
+        .track-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #00f2fe;
+        }
+
+        /* עיצוב הנגן המובנה */
+        audio {
+            width: 100%;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        /* כפתורי השליטה והניווט */
+        .controls-row {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-start;
+        }
+
+        .nav-btn {
+            background-color: #2a2a40;
+            color: #ffffff;
+            border: 1px solid #444466;
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-btn:hover {
+            background-color: #ff007f;
+            border-color: #ff007f;
+            box-shadow: 0 0 8px rgba(255, 0, 127, 0.4);
+        }
+
+        /* כפתור חזרה להתחלה בצבע קצת שונה להבחנה */
+        .btn-start:hover {
+            background-color: #00f2fe;
+            border-color: #00f2fe;
+            color: #111119;
+            box-shadow: 0 0 8px rgba(0, 242, 254, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>ההצגה שלנו 🎭</h1>
+    <p class="subtitle">רשימת השירים וקטעי האודיו הרשמית</p>
+
+    <div class="playlist-container">
+
+        <div class="audio-track">
+            <div class="track-title">צ'אט 2</div>
+            <audio id="audio-chat2" controls src="https://s3.ustatik.com/audio.com.audio/transcoding/12/53/1865540375885312-1865540375962148-1865540376857956.mp3?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=F0E8U41NBMMW3Y027UTJ%2F20260610%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260610T095150Z&X-Amz-SignedHeaders=host&X-Amz-Expires=518400&X-Amz-Signature=2eecec8fa3506f7bd44c5e60e05fd725ac23400a1abdfbfe2f1e6d94e41d5661"></audio>
+            <div class="controls-row">
+                <button class="nav-btn btn-start" onclick="skipTo('audio-chat2', 0)">↩️ להתחלה</button>
+                <button class="nav-btn" onclick="skipToEnd('audio-chat2')">לסוף ⏭️</button>
+            </div>
+        </div>
+
+        <div class="audio-track">
+            <div class="track-title">צ'אט 1</div>
+            <audio id="audio-chat1" controls src="https://s3.ustatik.com/audio.com.audio/transcoding/46/95/1865540352099546-1865540352208772-1865540353721955.mp3?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=F0E8U41NBMMW3Y027UTJ%2F20260610%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260610T095150Z&X-Amz-SignedHeaders=host&X-Amz-Expires=518400&X-Amz-Signature=1653783b818c9d9409caf79603376dc8d0a5e3bb16a33b4ed5470b0aa71f95f7"></audio>
+            <div class="controls-row">
+                <button class="nav-btn btn-start" onclick="skipTo('audio-chat1', 0)">↩️ להתחלה</button>
+                <button class="nav-btn" onclick="skipToEnd('audio-chat1')">לסוף ⏭️</button>
+            </div>
+        </div>
+
+        <div class="audio-track">
+            <div class="track-title">חתולים</div>
+            <audio id="audio-cats" controls src="https://s3.ustatik.com/audio.com.audio/transcoding/10/03/1865537934980310-1865537935157417-1865537986524299.mp3?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=F0E8U41NBMMW3Y027UTJ%2F20260610%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260610T095150Z&X-Amz-SignedHeaders=host&X-Amz-Expires=518400&X-Amz-Signature=c72d1eac526809c15d84c47918613009fbc91f4079409daeadcaac52d7ac9e97"></audio>
+            <div class="controls-row">
+                <button class="nav-btn btn-start" onclick="skipTo('audio-cats', 0)">↩️ להתחלה</button>
+                <button class="nav-btn" onclick="skipToEnd('audio-cats')">לסוף ⏭️</button>
+            </div>
+        </div>
+
+        <div class="audio-track">
+            <div class="track-title">קוקוס</div>
+            <audio id="audio-coconut" controls src="https://s3.ustatik.com/audio.com.audio/transcoding/89/39/1865537753923989-1865537753961913-1865537776046823.mp3?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=F0E8U41NBMMW3Y027UTJ%2F20260610%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260610T090818Z&X-Amz-SignedHeaders=host&X-Amz-Expires=518400&X-Amz-Signature=089bf5c1d956dd2dab733ab2d21dd5e4faa6c1d730864a7fce3339cbbeabe48a"></audio>
+            <div class="controls-row">
+                <button class="nav-btn btn-start" onclick="skipTo('audio-coconut', 0)">↩️ להתחלה</button>
+                <button class="nav-btn" onclick="skipToEnd('audio-coconut')">לסוף ⏭️</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // פונקציה שמקפיצה את הנגן לזמן מסוים (למשל 0 להתחלה)
+        function skipTo(audioId, seconds) {
+            const audio = document.getElementById(audioId);
+            if (audio) {
+                audio.currentTime = seconds;
+            }
+        }
+
+        // פונקציה שמקפיצה את הנגן לסוף השיר (שנייה אחת לפני הסוף המוחלט)
+        function skipToEnd(audioId) {
+            const audio = document.getElementById(audioId);
+            if (audio && audio.duration) {
+                audio.currentTime = audio.duration - 1; 
+            }
+        }
+    </script>
+</body>
+</html>
