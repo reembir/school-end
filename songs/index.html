@@ -99,7 +99,7 @@
             box-shadow: 0 0 8px rgba(255, 0, 127, 0.4);
         }
 
-        /* כפתור חזרה להתחלה בצבע קצת שונה להבחנה */
+        /* כפתור חזרה להתחלה */
         .btn-start:hover {
             background-color: #00f2fe;
             border-color: #00f2fe;
@@ -148,6 +148,15 @@
             <div class="controls-row">
                 <button class="nav-btn btn-start" onclick="skipTo('audio-coconut', 0)">↩️ להתחלה</button>
                 <button class="nav-btn" onclick="skipToEnd('audio-coconut')">לסוף ⏭️</button>
+            </div>
+        </div>
+
+        <div class="audio-track">
+            <div class="track-title">רוץ - הפיל הכחול</div>
+            <audio id="audio-ruz" controls src="ruz.mp3"></audio>
+            <div class="controls-row">
+                <button class="nav-btn btn-start" onclick="skipTo('audio-ruz', 0)">↩️ להתחלה</button>
+                <button class="nav-btn" onclick="skipToEnd('audio-ruz')">לסוף ⏭️</button>
             </div>
         </div>
 
