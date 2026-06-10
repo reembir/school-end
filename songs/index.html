@@ -113,7 +113,7 @@
     <h1>ההצגה שלנו 🎭</h1>
     <p class="subtitle">רשימת השירים וקטעי האודיו הרשמית</p>
 
-    <div class="playlist-container">
+    <div class="playlist-container" id="playlist">
 
         <div class="audio-track">
             <div class="track-title">צ'אט 2</div>
@@ -151,19 +151,45 @@
             </div>
         </div>
 
-        <div class="audio-track">
-            <div class="track-title">רוץ - הפיל הכחול</div>
-            <audio id="audio-ruz" controls src="ruz.mp3"></audio>
-            <div class="controls-row">
-                <button class="nav-btn btn-start" onclick="skipTo('audio-ruz', 0)">↩️ להתחלה</button>
-                <button class="nav-btn" onclick="skipToEnd('audio-ruz')">לסוף ⏭️</button>
-            </div>
         </div>
 
-    </div>
-
     <script>
-        // פונקציה שמקפיצה את הנגן לזמן מסוים (למשל 0 להתחלה)
+        // ==========================================
+        // 📋 רשימת השירים המקומיים (קבצים בלבד)
+        // בכל שורה שים קודם את שם הקובץ ואז פסיק ואת שם השיר
+        // ==========================================
+        const localSongs = [
+            { file: "ruz.mp3", title: "רוץ הפיל הכחול" },
+            // תוכל להוסיף כאן עוד שירים בעתיד בצורה הזו:
+            // { file: "song2.mp3", title: "שם השיר השני" },
+        ];
+
+        // פונקציה שמייצרת את הנגנים עבור הקבצים המקומיים ומציגה אותם באתר
+        function loadLocalSongs() {
+            const playlist = document.getElementById('playlist');
+            
+            localSongs.forEach((song, index) => {
+                // יצירת מזהה ייחודי לכל שיר ברשימה המקומית
+                const uniqueId = `local-audio-${index}`;
+                
+                const trackHTML = `
+                    <div class="audio-track">
+                        <div class="track-title">${song.title}</div>
+                        <audio id="${uniqueId}" controls src="${song.file}"></audio>
+                        <div class="controls-row">
+                            <button class="nav-btn btn-start" onclick="skipTo('${uniqueId}', 0)">↩️ להתחלה</button>
+                            <button class="nav-btn" onclick="skipToEnd('${uniqueId}')">לסוף ⏭️</button>
+                        </div>
+                    </div>
+                `;
+                playlist.innerHTML += trackHTML;
+            });
+        }
+
+        // הפעלת טעינת השירים המקומיים מיד כשהדף עולה
+        window.onload = loadLocalSongs;
+
+        // פונקציות הניווט (להתחלה ולסוף)
         function skipTo(audioId, seconds) {
             const audio = document.getElementById(audioId);
             if (audio) {
@@ -171,7 +197,6 @@
             }
         }
 
-        // פונקציה שמקפיצה את הנגן לסוף השיר (שנייה אחת לפני הסוף המוחלט)
         function skipToEnd(audioId) {
             const audio = document.getElementById(audioId);
             if (audio && audio.duration) {
